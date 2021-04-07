@@ -61,7 +61,7 @@ class XTEA
     public function encrypt(string $plain): string
     {
         $cipher = [];
-        $n      = \mb_strlen($plain);
+        $n      = \strlen($plain);
         if ($n % 8 !== 0) {
             $lng = ($n + (8 - ($n % 8)));
         } else {
