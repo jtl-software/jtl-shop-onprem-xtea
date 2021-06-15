@@ -312,7 +312,7 @@ class XTEA
     /**
      * Covert a string into longinteger
      *
-     * @param $data
+     * @param string $data
      * @return array
      */
     private function str2long($data)
