@@ -71,15 +71,15 @@ class XTEA
         // Initialization vector: IV
         if ($this->cbc === 1) {
             $cipher[0][0] = \time();
-            $cipher[0][1] = (double)\microtime() * 1000000;
+            $cipher[0][1] = \floor((double)\microtime() * 1000000);
         }
 
         $a   = 1;
         $cnt = \count($text);
         for ($i = 0; $i < $cnt; $i += 2) {
             if ($this->cbc === 1) {
-                //$text mit letztem Geheimtext XOR Verknuepfen
-                //$text is XORed with the previous ciphertext
+                // $text mit letztem Geheimtext XOR Verknuepfen
+                // $text is XORed with the previous ciphertext
                 $text[$i]     ^= $cipher[$a - 1][0];
                 $text[$i + 1] ^= $cipher[$a - 1][1];
             }
@@ -112,7 +112,7 @@ class XTEA
             // XORed $return with the previous ciphertext
             if ($this->cbc === 1) {
                 $plain[] = [$return[0] ^ $cipher[$i - 2], $return[1] ^ $cipher[$i - 1]];
-            } else {//EBC Mode
+            } else { //EBC Mode
                 $plain[] = $return;
             }
         }
@@ -308,23 +308,15 @@ class XTEA
         return $result;
     }
 
-
     /**
      * Covert a string into longinteger
      *
      * @param string $data
      * @return array
      */
-    private function str2long($data)
+    private function str2long($data): array
     {
-        $tmp  = \unpack('N*', $data);
-        $long = [];
-        $j    = 0;
-        foreach ($tmp as $value) {
-            $long[$j++] = $value;
-        }
-
-        return $long;
+        return \array_values(\unpack('N*', $data));
     }
 
     /**
