@@ -71,7 +71,7 @@ class XTEA
         // Initialization vector: IV
         if ($this->cbc === 1) {
             $cipher[0][0] = \time();
-            $cipher[0][1] = \floor((double)\microtime() * 1000000);
+            $cipher[0][1] = \floor((float)\microtime() * 1000000);
         }
 
         $a   = 1;
@@ -147,9 +147,9 @@ class XTEA
     {
         $string = \str_pad('', $length, 'text');
         $xtea   = new self('key');
-        $start  = \time() + (double)\microtime();
+        $start  = \time() + (float)\microtime();
         $xtea->encrypt($string);
-        $end = \time() + (double)\microtime();
+        $end = \time() + (float)\microtime();
 
         echo 'Encrypting ' . $length . ' bytes: ' . \round(
                 $end - $start,
